@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OV-Chipkaart Systeem</title>
+</head>
+<body>
+    <h1>OV-Chipkaart Systeem</h1>
+
+    <button onclick="nieuwePassagier(123456, 'Jan Jansen', 50, 'Amsterdam', '0654321098')">Nieuwe Passagier Toevoegen</button>
+    <button onclick="incheckenPassagier(123456, 10)">Inchecken</button>
+    <button onclick="uitcheckenPassagier(123456, 20)">Uitchecken</button>
+    <button onclick="ovKaartOpzeggen(163821)">OV-Kaart Opzeggen</button>
+    <button onclick="toonPassagiers()">Toon Passagiers</button>
+
+    <script>
+        const passagiers = [
+            { id: 163821, naam: "Leo Daams", saldo: 34, woonplaats: "Den Bosch", telefoonnummer: "0612345678" },
+            { id: 145032, naam: "Nicole Hops", saldo: 18, woonplaats: "Maastricht", telefoonnummer: "0687654321" }
+        ];
+
+        function nieuwePassagier(id, naam, saldo, woonplaats, telefoonnummer) {
+            passagiers.push({ id, naam, saldo, woonplaats, telefoonnummer });
+        }
+
+        function incheckenPassagier(id, bedrag) {
+            const passagier = passagiers.find(p => p.id === id);
+            if (passagier) {
+                passagier.saldo += bedrag;
+                console.log(`${passagier.naam} heeft ingecheckt. Nieuw saldo: ${passagier.saldo}`);
+            } else {
+                console.log("Passagier niet gevonden.");
+            }
+        }
+
+        function uitcheckenPassagier(id, bedrag) {
+            const passagier = passagiers.find(p => p.id === id);
+            if (passagier) {
+                if (passagier.saldo >= bedrag) {
+                    passagier.saldo -= bedrag;
+                    console.log(`${passagier.naam} heeft uitgecheckt. Nieuw saldo: ${passagier.saldo}`);
+                } else {
+                    console.log("Onvoldoende saldo.");
+                }
+            } else {
+                console.log("Passagier niet gevonden.");
+            }
+        }
+
+        function ovKaartOpzeggen(id) {
+            const index = passagiers.findIndex(p => p.id === id);
+            if (index !== -1) {
+                passagiers.splice(index, 1);
+                console.log("OV-kaart is opgezegd.");
+            } else {
+                console.log("Passagier niet gevonden.");
+            }
+        }
+
+        function toonPassagiers() {
+            console.log("Passagiers:");
+            passagiers.forEach(p => console.log(`${p.naam} - Saldo: ${p.saldo}, Woonplaats: ${p.woonplaats}, Telefoonnummer: ${p.telefoonnummer}`));
+        }
+    </script>
+</body>
+</html>
