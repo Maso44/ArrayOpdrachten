@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 6 Hit Songs</title>
+</head>
+<body>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var hitSongs = [
+        "Song 1",
+        "Song 2",
+        "Song 3",
+        "Song 4",
+        "Song 5",
+        "Song 6"
+    ];
+
+    document.getElementById("song1").innerText = hitSongs[0];
+
+    document.getElementById("song3").innerText = "Verzoeknummer: " + hitSongs[2];
+
+    var songList = document.getElementById("songList");
+    hitSongs.forEach(function(song, index) {
+        var listItem = document.createElement("li");
+        listItem.innerText = "Song " + (index + 1) + ": " + song;
+        songList.appendChild(listItem);
+    });
+});
+</script>
+
+<h2>Top 6 Beste nummers</h2>
+
+<p>1. <span id="song1"></span></p>
+
+<p>Ik raad dit nummer aan: <span id="song3"></span></p>
+
+<h3>Song List</h3>
+<ul id="songList"></ul>
+
+</body>
+</html>
